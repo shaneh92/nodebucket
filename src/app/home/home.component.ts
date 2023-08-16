@@ -1,6 +1,7 @@
 /**
  * Title: home.component.ts
  * Author: Professor Krasso
+ * Modified by: Shane Hingtgen
  * Date: 8/5/23
  */
 

@@ -1,6 +1,7 @@
 /**
  * Title: app.component.ts
  * Author: Professor Krasso
+ * Modified by: Shane Hingtgen
  * Date: 8/5/23
  */
 
@@ -13,7 +14,6 @@ import { Component } from '@angular/core';
     <!-- This router-outlet displays the content of the BaseLayout or AuthLayout components -->
     <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [],
 })
-export class AppComponent {
-}
+export class AppComponent {}

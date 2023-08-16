@@ -1,6 +1,7 @@
 /**
  * Title: nav.component.ts
  * Author: Professor Krasso
+ * Modified by: Shane Hingtgen
  * Date: 8/5/23
  */
 
@@ -10,8 +11,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
-export class NavComponent {
-
-}
+export class NavComponent {}

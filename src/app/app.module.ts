@@ -1,6 +1,7 @@
 /**
  * Title: app.module.ts
  * Author: Professor Krasso
+ * Modified by: Shane Hingtgen
  * Date: 8/5/23
  */
 
@@ -21,13 +22,10 @@ import { FooterComponent } from './layouts/footer/footer.component';
     HomeComponent,
     BaseLayoutComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
