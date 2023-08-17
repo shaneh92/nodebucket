@@ -33,7 +33,7 @@
       </li>
 
       <li *ngIf="!isSignedIn">
-        <a class="nav-link" routerLink="/security/signin">Sign in</a>
+        <a class="nav-link" routerLink="/security/signin">Sign In</a>
       </li>
       <!-- user account -->
       <li *ngIf="isSignedIn" class="nav-item dropdown">
@@ -60,7 +60,7 @@
             >
           </li>
           <li>
-            <a (click)="signout()" class="dropdown">Sign Out</a>
+            <a (click)="signout()" class="dropdown-item link">Sign Out</a>
           </li>
         </ul>
       </li>

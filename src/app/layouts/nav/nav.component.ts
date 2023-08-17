@@ -21,6 +21,7 @@ export interface AppUser {
 export class NavComponent {
   appUser: AppUser;
   isSignedIn: boolean;
+
   constructor(private cookieService: CookieService) {
     this.appUser = {} as AppUser;
     this.isSignedIn = this.cookieService.get('session_user') ? true : false;
