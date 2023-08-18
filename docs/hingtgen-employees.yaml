@@ -3,12 +3,19 @@ info:
   title: Create an employees API
   version: "1.0.0"
 paths:
-  /composers:
+  /employees/{empId}:
     get:
       tags:
         - Employees
       description: API for returning employees by Id MongoDB Atlas.
       summary: returns a employees first name last name and empId with a valid id.
+      parameters:
+        - name: empId
+          in: path
+          required: true
+          description: The employee Id requested by the user.
+          schema:
+            type: number
       responses:
         "200":
           description: Composer Documents
@@ -20,51 +27,6 @@ paths:
           description: Server Exception
         "501":
           description: MongoDB Exception
-  #   post:
-  #     tags:
-  #       - Composers
-  #     description: API for adding a new composer to MongoDB.
-  #     summary: Creates a new composer object.
-  #     requestBody:
-  #       description: Object information.
-  #       content:
-  #         application/json:
-  #           schema:
-  #             required:
-  #               - firstName
-  #               - lastName
-  #             properties:
-  #               firstName:
-  #                 type: string
-  #               lastName:
-  #                 type: string
-  #     responses:
-  #       "200":
-  #         description: User Added
-  #       "500":
-  #         description: Server Exception
-  #       "501":
-  #         description: MongoDB Exception
-  # /composers/{id}:
-  #   get:
-  #     tags:
-  #       - Composers
-  #     description: API for returning a single composer from MongoDB.
-  #     summary: returns a single composer.
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         required: true
-  #         description: The composerId requested by the user.
-  #         schema:
-  #           type: string
-  #     responses:
-  #       "200":
-  #         description: Composer Document in JSON Format
-  #       "500":
-  #         description: Server Exception
-  #       "501":
-  #         description: MongoDB Exception
 # Operations Description
 # First create the employees API goals, what the goal/description of each API should do and what they need
 # Second create a table that shows the API requirements, this will include operation, HTTP Protocol, parameters, data type and path

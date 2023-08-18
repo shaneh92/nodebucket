@@ -17,19 +17,26 @@ const { mongo } = require("../utils/mongo");
  *   get:
  *     tags:
  *       - Employees
- *     description: API for returning employees by Id.
- *     summary: returns employees by id in JSON format.
+ *     description:  API for returning an employee document
+ *     summary: returns an employee document
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: employee document id
+ *         schema:
+ *           type: number
  *     responses:
  *       '200':
- *         description: Employee by Id.
+ *         description: Composer document
  *       '400':
- *        description: Bad Request.
+ *         description: Bad request
  *       '404':
- *         description: Not Found.
+ *         description: Not found
  *       '500':
- *         description: Server Exception.
+ *         description: Server exception
  *       '501':
- *         description: MongoDB Exception.
+ *         description: MongoDB Exception
  */
 
 router.get("/:empId", (req, res, next) => {

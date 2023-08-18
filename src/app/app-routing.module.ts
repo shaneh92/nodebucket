@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { HomeComponent } from './home/home.component';
+import { TaskManagementComponent } from './task-management/task-management.component';
+import { authGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,6 +20,14 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         title: 'Nodebucket: Home',
+      },
+      {
+        path: 'task-management',
+        loadChildren: () =>
+          import('./task-management/task-management.module').then(
+            (m) => m.TaskManagementModule
+          ),
+        canActivate: [authGuard],
       },
     ],
   },

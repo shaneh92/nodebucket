@@ -60,7 +60,8 @@ export class SigninComponent {
         );
 
         const returnUrl =
-          this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+          this.route.snapshot.queryParamMap.get('returnUrl') ||
+          'task-management/my-tasks';
 
         this.isLoading = false;
 
