@@ -23,7 +23,7 @@ export class SigninComponent {
   signinForm = this.fb.group({
     empId: [
       null,
-      Validators.compose([Validators.required, Validators.pattern('^[0-9*$')]),
+      Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')]),
     ],
   });
 

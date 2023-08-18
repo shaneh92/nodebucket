@@ -12,13 +12,26 @@ const { mongo } = require("../utils/mongo");
 
 /**
  * findEmployeeById
- * Description: Accept values 1007-1012
- * @example
- * localhost:3000/api/employees/1007 - 200 Success
- * localhost:3000/api/employees/asdf - 400 Bad Request
- * localhost:3000/api/employees/1016 - 404 Not Found
- * localhost:3000/api/employees/1008 - 500 Server Error (DB not connected)
+ * @openapi
+ * /api/employees/{empId}:
+ *   get:
+ *     tags:
+ *       - Employees
+ *     description: API for returning employees by Id.
+ *     summary: returns employees by id in JSON format.
+ *     responses:
+ *       '200':
+ *         description: Employee by Id.
+ *       '400':
+ *        description: Bad Request.
+ *       '404':
+ *         description: Not Found.
+ *       '500':
+ *         description: Server Exception.
+ *       '501':
+ *         description: MongoDB Exception.
  */
+
 router.get("/:empId", (req, res, next) => {
   try {
     let { empId } = req.params; //get the empId from the req.params object

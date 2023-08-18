@@ -5,15 +5,8 @@ import { TaskManagementRoutingModule } from './task-management-routing.module';
 import { TaskManagementComponent } from './task-management.component';
 import { TasksComponent } from './tasks/tasks.component';
 
-
 @NgModule({
-  declarations: [
-    TaskManagementComponent,
-    TasksComponent
-  ],
-  imports: [
-    CommonModule,
-    TaskManagementRoutingModule
-  ]
+  declarations: [TaskManagementComponent, TasksComponent],
+  imports: [CommonModule, TaskManagementRoutingModule],
 })
-export class TaskManagementModule { }
+export class TaskManagementModule {}

@@ -5,7 +5,7 @@
  * Date: 8/5/23
  */
 
-// imports statements
+// import statements
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 

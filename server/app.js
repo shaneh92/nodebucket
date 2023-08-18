@@ -11,9 +11,17 @@ const express = require("express");
 const createServer = require("http-errors");
 const path = require("path");
 const employeeRoute = require("./routes/employee");
+const http = require("http");
+
+// swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 // Create the Express app
 const app = express();
+
+//port set
+app.set("port", process.env.PORT || 3000);
 
 // Configure the app
 app.use(express.json());
@@ -27,6 +35,24 @@ app.use("/api/employees", employeeRoute);
 app.use(function (req, res, next) {
   next(createServer(404)); // forward to error handler
 });
+// more swagger: openapi specification
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Nodebucket RESTful APIs",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./routes/*.js"], //files containing annotations for the OpenAPI Specification
+};
+
+// more swagger: assigning a variable to call swaggerJsdoc
+const openapiSpecification = swaggerJsdoc(options);
+
+// more swagger: wire openapiSpecification to app variable
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.use("/api", employeeRoute);
 
 // error handler for all other errors
 app.use(function (err, req, res, next) {
@@ -39,6 +65,11 @@ app.use(function (err, req, res, next) {
     message: err.message,
     stack: req.app.get("env") === "development" ? err.stack : undefined,
   });
+});
+
+//more swagger: creating our http server on the port number
+http.createServer(app).listen(app.get("port"), function () {
+  console.log(`Application started and listening on port ${app.get("port")}`);
 });
 
 module.exports = app; // export the Express application
