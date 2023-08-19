@@ -14,7 +14,9 @@ const employeeRoute = require("./routes/employee");
 
 // swagger
 const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerDocument = require("../employee.json");
+// https://levelup.gitconnected.com/how-to-add-swagger-ui-to-existing-node-js-and-express-js-project-2c8bad9364ce
+// Link provided by Erin Brady with assistance from Chris Gorham
 
 // Create the Express app
 const app = express();
@@ -39,11 +41,8 @@ const options = {
   apis: ["./routes/*.js"], //files containing annotations for the OpenAPI Specification
 };
 
-// more swagger: assigning a variable to call swaggerJsdoc
-const openapiSpecification = swaggerJsdoc(options);
-
 // more swagger: wire openapiSpecification to app variable
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", employeeRoute);
 
 // error handler for 404 errors

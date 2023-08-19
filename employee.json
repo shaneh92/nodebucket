@@ -1,44 +1,76 @@
-[
-  {
-    "empId": 1007,
-    "firstName": "Johann",
-    "lastName": "Bach",
-    "toDo": [],
-    "done": []
+{
+  "openapi": "3.0.3",
+
+  "info": {
+    "version": "1.0.0",
+    "title": "nodebucket employees API",
+    "description": "employee API"
   },
-  {
-    "empId": 1008,
-    "firstName": "Ally",
-    "lastName": "Hingtgen",
-    "toDo": [],
-    "done": []
-  },
-  {
-    "empId": 1009,
-    "firstName": "Harper",
-    "lastName": "Hingtgen",
-    "toDo": [],
-    "done": []
-  },
-  {
-    "empId": 1010,
-    "firstName": "Bella",
-    "lastName": "Sue",
-    "toDo": [],
-    "done": []
-  },
-  {
-    "empId": 1011,
-    "firstName": "Paige",
-    "lastName": "Catherine",
-    "toDo": [],
-    "done": []
-  },
-  {
-    "empId": 1012,
-    "firstName": "Chris",
-    "lastName": "Prior",
-    "toDo": [],
-    "done": []
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Employees",
+      "description": "API for employees"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/employees/{empId}:": {
+      "get": {
+        "tags": ["employees"],
+        "summary": "findEmployeeById and will be able to return full name",
+        "description": "findEmployeeById and will be able to return full name based on their empId",
+        "parameters": [
+          {
+            "name": "empId",
+            "in": "path",
+            "description": "Employee ID",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee document found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "empId": {
+                      "type": "number",
+                      "example": 1009
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Ally"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Hingtgen"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
   }
-]
+}

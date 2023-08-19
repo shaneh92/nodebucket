@@ -28,15 +28,13 @@ const { mongo } = require("../utils/mongo");
  *           type: number
  *     responses:
  *       '200':
- *         description: Composer document
+ *         description: Employee document found
  *       '400':
  *         description: Bad request
  *       '404':
  *         description: Not found
  *       '500':
- *         description: Server exception
- *       '501':
- *         description: MongoDB Exception
+ *         description: Server Error
  */
 
 router.get("/:empId", (req, res, next) => {
