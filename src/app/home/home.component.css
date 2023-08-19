@@ -3,3 +3,7 @@ Title: nav.component.css
 Author: Shane Hingtgen
 Date: 8/17/23
 */
+.container-fluid {
+  background-color: #0f1d4a;
+  color: white;
+}

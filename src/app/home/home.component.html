@@ -4,14 +4,51 @@
   Date: 8/14/23
  -->
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <h1>
-        Home Component Works! <span class="material-icons">thumb_up</span>
-      </h1>
+<!-- our landing page that has the images as links -->
+<div class="container-fluid pt-2">
+  <h1 class="text-center">Welcome to the Nodebucket Application!</h1>
+  <div class="row mt-5">
+    <div class="col-sm-4">
+      <figure>
+        <a routerLink="/task-management/my-tasks">
+          <img
+            class="img-fluid"
+            src="./assets/todo.jpg"
+            alt="person writing bucket list"
+          />
+        </a>
+        <h1>Tasks</h1>
+        <p>
+          Nodebucket is a simple to-do list application that allows you to
+          manage and keep track your tasks.
+        </p>
+      </figure>
+    </div>
+    <div class="col-sm-4">
+      <figure>
+        <a routerLink="#">
+          <img
+            class="img-fluid"
+            src="./assets/about-us.jpg"
+            alt="framed eye glasses on top of a book"
+          />
+        </a>
+        <h1>About Us</h1>
+        <p>Learn more about our company and why Nodebucket is right for you!</p>
+      </figure>
+    </div>
+    <div class="col-sm-4">
+      <figure>
+        <a routerLink="#">
+          <img
+            class="img-fluid"
+            src="./assets/contact-us.jpg"
+            alt="contact us scrabble photo"
+          />
+        </a>
+        <h1>Contact Us</h1>
+        <p>Have questions? We have answer. Contact us today!</p>
+      </figure>
     </div>
   </div>
-
-  <a routerLink="/security">Test Security Module</a>
 </div>

@@ -1,0 +1,28 @@
+/* 
+Title: signin.component.css
+Author: Shane Hingtgen
+Date: 8/17/23
+*/
+
+/* changed the backgrounds and the signin card to match theme */
+.btn-dark {
+  background-color: #946b2d;
+  color: white;
+}
+
+.card {
+  background-color: #0f1d4a;
+  color: white;
+}
+
+.card-title {
+  border-bottom: 2px solid #946b2d;
+}
+
+.container {
+  background-color: #223164;
+}
+
+a {
+  color: white;
+}

@@ -12,6 +12,12 @@ const createServer = require("http-errors");
 const path = require("path");
 const employeeRoute = require("./routes/employee");
 
+// swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../employee.json");
+// https://levelup.gitconnected.com/how-to-add-swagger-ui-to-existing-node-js-and-express-js-project-2c8bad9364ce
+// Link provided by Erin Brady with assistance from Chris Gorham
+
 // Create the Express app
 const app = express();
 
@@ -23,7 +29,24 @@ app.use("/", express.static(path.join(__dirname, "../dist/nodebucket")));
 
 app.use("/api/employees", employeeRoute);
 
+// more swagger: openapi specification
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Nodebucket RESTful APIs",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./routes/*.js"], //files containing annotations for the OpenAPI Specification
+};
+
+// more swagger: wire openapiSpecification to app variable
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api", employeeRoute);
+
 // error handler for 404 errors
+
 app.use(function (req, res, next) {
   next(createServer(404)); // forward to error handler
 });

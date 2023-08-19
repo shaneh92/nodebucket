@@ -3,3 +3,13 @@ Title: nav.component.css
 Author: Shane Hingtgen
 Date: 8/17/23
 */
+
+footer {
+  background-color: #0f1d4a;
+  color: white;
+  border-top: 5px solid #946b2d;
+}
+
+.navbar-dark {
+  color: white;
+}

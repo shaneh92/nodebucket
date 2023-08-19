@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+.text-underline-hover {
+  text-decoration: none;
+}
+
+.text-underline-hover:hover {
+  text-decoration: underline;
+}
+
+.full-height {
+  height: 100vh !important;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+html,
+body {
+  background-color: #223164 !important;
+}
+
+/* Mobile view ports */
+
+@media only screen and (max-device-width: 567px) {
+  .dropdown-menu {
+    background-color: #0f1d4a !important;
+    color: white !important;
+  }
+
+  .dropdown-item {
+    color: white !important;
+  }
+
+  .dropdown-item:hover {
+    cursor: pointer;
+    background-color: #0f1d4a !important;
+    color: white !important;
+  }
+
+  .material-icons {
+    color: white !important;
+  }
+}
