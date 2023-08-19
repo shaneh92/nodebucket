@@ -8,7 +8,7 @@
   <a routerLink="/" class="navbar-brand">Nodebucket</a>
 
   <button
-    class="navbar-toggler"
+    class="navbar-toggler custom-toggler"
     type="button"
     data-bs-toggle="collapse"
     data-bs-target="#navbarResponsive"
@@ -47,7 +47,7 @@
         >
           <span class="material-icons">person</span>
         </a>
-
+        <!-- another drop down on hover -->
         <ul
           class="dropdown-menu dropdown-menu-end"
           aria-labelledby="navbarDropdown"
@@ -59,6 +59,7 @@
               >My Tasks</a
             >
           </li>
+          <!-- a link to sign out -->
           <li>
             <a (click)="signout()" class="dropdown-item link">Sign Out</a>
           </li>

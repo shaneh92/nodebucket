@@ -17,6 +17,7 @@ import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component
 import { NavComponent } from './layouts/nav/nav.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 
+// module declarations and imports
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,8 +1,15 @@
+<!-- 
+  Title: task.component.html
+  Author: Shane Hingtgen
+  Date: 8/14/23
+ -->
+
+<!-- employee sign in card -->
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-lg-4 col-md-6 col-sm-6">
       <div class="card shadow">
-        <div class="card-title text-center border-bottom">
+        <div class="card-title text-center">
           <h2 class="p-3">Employee Sign In</h2>
         </div>
         <!-- error message -->
@@ -15,6 +22,7 @@
             [formGroup]="signinForm"
             (ngSubmit)="signin(); signinForm.reset();"
           >
+          <!-- a form to input empId -->
             <div class="mb-4">
               <label for="empId" class="form-label">Employee ID:</label>
               <input
@@ -25,6 +33,7 @@
               />
             </div>
             <div class="d-grid">
+              <!-- submit button, that will have a loading spinner when signing in -->
               <button type="submit" class="btn btn-dark">
                 <span *ngIf="!isLoading">Sign in</span>
                 <div *ngIf="isLoading">
@@ -40,7 +49,8 @@
           </form>
         </div>
       </div>
-      <a routerLink="/" class="text-dark text-underline-hover">Return</a>
+      <!-- our return to home page link -->
+      <a routerLink="/" class="text-underline-hover">Return</a>
     </div>
   </div>
 </div>

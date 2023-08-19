@@ -53,20 +53,24 @@ router.get("/:empId", (req, res, next) => {
       return;
     }
 
-    mongo(async (db) => {
-      const employee = await db.collection("employees").findOne({ empId }); //find employee by ID
+    mongo(
+      async (db) => {
+        const employee = await db.collection("employees").findOne({ empId }); //find employee by ID
 
-      if (!employee) {
-        // if empId does not exist
-        const err = new Error("Unable to find employee with empId ", empId);
-        err.status = 404;
-        console.log("err", err);
-        next(err);
-        return;
-      }
+        if (!employee) {
+          // if empId does not exist
+          const err = new Error("Unable to find employee with empId ", empId);
+          err.status = 404;
+          console.log("err", err);
+          next(err);
+          return;
+        }
 
-      res.send(employee);
-    }, next);
+        res.send(employee);
+      },
+      // err handling
+      next
+    );
   } catch (err) {
     console.log("err", err);
     next(err);

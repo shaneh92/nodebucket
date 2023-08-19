@@ -16,6 +16,7 @@ import { SecurityRoutingModule } from './security-routing.module';
 import { SecurityComponent } from './security.component';
 import { SigninComponent } from './signin/signin.component';
 
+// module declarations and imports
 @NgModule({
   declarations: [SecurityComponent, SigninComponent],
   imports: [

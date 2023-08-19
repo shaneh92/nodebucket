@@ -1,9 +1,17 @@
+/**
+ * Title: signin.component.ts
+ * Author: Shane Hingtgen
+ * Date: 8/15/23
+ */
+
+// imports statements
 import { SecurityService } from './../security.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
+// session user interface declarations to tell what type our properties are
 export interface SessionUser {
   empId: number;
   firstName: string;
@@ -15,6 +23,8 @@ export interface SessionUser {
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
+
+// signin component class that handles the signin functionality
 export class SigninComponent {
   errorMessage: string;
   sessionUser: SessionUser;
@@ -27,6 +37,7 @@ export class SigninComponent {
     ],
   });
 
+  // constructor that injects our dependencies
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -38,6 +49,7 @@ export class SigninComponent {
     this.errorMessage = '';
   }
 
+  // signin function that handles the signin functionality
   signin() {
     this.isLoading = true;
     const empId = this.signinForm.controls['empId'].value;
@@ -49,6 +61,7 @@ export class SigninComponent {
       return;
     }
 
+    // call to our API to get an employee by ID
     this.secService.findEmployeeById(empId).subscribe({
       next: (employee: any) => {
         this.sessionUser = employee;
@@ -59,6 +72,7 @@ export class SigninComponent {
           1
         );
 
+        // this is the return url after the user logs in
         const returnUrl =
           this.route.snapshot.queryParamMap.get('returnUrl') ||
           'task-management/my-tasks';
@@ -67,6 +81,7 @@ export class SigninComponent {
 
         this.router.navigate([returnUrl]);
       },
+      // error handling
       error: (err) => {
         this.isLoading = false;
 

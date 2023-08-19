@@ -9,6 +9,7 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
+// AppUser interface with fullName property set to string
 export interface AppUser {
   fullName: string;
 }

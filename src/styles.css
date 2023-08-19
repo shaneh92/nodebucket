@@ -15,25 +15,30 @@
   cursor: pointer;
 }
 
+html,
+body {
+  background-color: #223164 !important;
+}
+
 /* Mobile view ports */
 
 @media only screen and (max-device-width: 567px) {
   .dropdown-menu {
-    background-color: #212529 !important;
-    color: rgba(255, 255, 255, 0.55) !important;
+    background-color: #0f1d4a !important;
+    color: white !important;
   }
 
   .dropdown-item {
-    color: rgba(255, 255, 255, 0.55) !important;
+    color: white !important;
   }
 
   .dropdown-item:hover {
     cursor: pointer;
-    background-color: #212529 !important;
-    color: rgba(255, 255, 255, 0.75) !important;
+    background-color: #0f1d4a !important;
+    color: white !important;
   }
 
   .material-icons {
-    color: rgba(255, 255, 255, 0.55) !important;
+    color: white !important;
   }
 }

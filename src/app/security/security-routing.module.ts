@@ -1,6 +1,7 @@
 /**
  * Title: security-routing.module.ts
  * Author: Professor Krasso
+ * Modified by: Shane Hingtgen
  * Date: 8/5/23
  */
 
@@ -10,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SecurityComponent } from './security.component';
 import { SigninComponent } from './signin/signin.component';
 
+// routes for our sign in component
 const routes: Routes = [
   {
     path: '',

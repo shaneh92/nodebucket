@@ -1,11 +1,18 @@
+/**
+ * Title: app-routing.module.ts
+ * Author: Professor Krasso
+ * Modified by: Shane Hingtgen
+ * Date: 8/15/23
+ */
+
 // import statements
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { HomeComponent } from './home/home.component';
-import { TaskManagementComponent } from './task-management/task-management.component';
 import { authGuard } from './shared/auth.guard';
 
+// these are our routes to tell our app where to go when a user clicks on a link
 const routes: Routes = [
   {
     path: '',
@@ -27,6 +34,7 @@ const routes: Routes = [
           import('./task-management/task-management.module').then(
             (m) => m.TaskManagementModule
           ),
+        // authGuard is a custom guard that we created to protect our route from being accessed by unauthorized users
         canActivate: [authGuard],
       },
     ],
