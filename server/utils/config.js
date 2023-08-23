@@ -1,4 +1,10 @@
-// production example
+/**
+ * Title: app.js
+ * Author: Professor Krasso
+ * Date: 8/21/2023
+ */
+
+//this is only a production example
 "use strict";
 
 const {

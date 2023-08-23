@@ -6,6 +6,7 @@
 
 "user strict";
 
+// imports
 const express = require("express");
 const router = express.Router();
 const { mongo } = require("../utils/mongo");
@@ -99,7 +100,23 @@ router.get("/:empId", (req, res, next) => {
 /**
  * findAllTasks
  * @openapi
+ * /api/empId:
+ *   get:
+ *     tags:
+ *       - Employees
+ *     description: API for returning an array of employee objects.
+ *     summary: returns an array of employees in JSON format.
+ *     responses:
+ *       '200':
+ *         description: Employee document found
+ *       '400':
+ *         description: Bad request
+ *       '404':
+ *         description: Not found
+ *       '500':
+ *         description: Server Error
  */
+
 router.get("/:empId/tasks", (req, res, next) => {
   try {
     console.log("findAllTasks API");
@@ -114,6 +131,7 @@ router.get("/:empId/tasks", (req, res, next) => {
       return;
     }
 
+    // connection to mongo, to find collection, then find one empId.
     mongo(async (db) => {
       const tasks = await db
         .collection("employees")
@@ -137,7 +155,35 @@ router.get("/:empId/tasks", (req, res, next) => {
 });
 
 /**
- *
+ * createTask
+ * @openapi
+ * /api/empId/tasks:
+ *   post:
+ *     tags:
+ *       - Employees
+ *     name: createTask
+ *     description: API for adding a new task document to MongoDB Atlas
+ *     summary: Creates a new task document
+ *     requestBody:
+ *       description: Composer information
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - empId
+ *             properties:
+ *              type: object
+ *                text:
+ *                  type: string
+ *     responses:
+ *       '200':
+ *         description: Employee document found
+ *       '400':
+ *         description: Bad request
+ *       '404':
+ *         description: Not found
+ *       '500':
+ *         description: Server Error
  */
 
 router.post("/:empId/tasks", (req, res, next) => {
@@ -155,11 +201,13 @@ router.post("/:empId/tasks", (req, res, next) => {
       return;
     }
 
+    // connects to mongo, finds collection of employees, then finds one employee by empId
     mongo(async (db) => {
       const employee = await db.collection("employees").findOne({ empId });
 
       console.log("employee", employee);
 
+      // if not employee found with empId error 404
       if (!employee) {
         const err = new Error("unable to find employee with empId ", empId);
         err.status = 404;
@@ -176,6 +224,7 @@ router.post("/:empId/tasks", (req, res, next) => {
 
       console.log("valid", valid);
 
+      // if its not valid, throw an error 400
       if (!valid) {
         const err = new Error("Bad Request");
         err.status = 400;
@@ -196,6 +245,7 @@ router.post("/:empId/tasks", (req, res, next) => {
 
       console.log("result", result);
 
+      // if no result, throw an error 404
       if (!result.modifiedCount) {
         const err = new Error("unable to create task for empId ", empId);
         err.status = 404;
@@ -207,8 +257,10 @@ router.post("/:empId/tasks", (req, res, next) => {
       res.status(201).send({ id: task._id });
     }, next);
   } catch (err) {
-    console.log("err", err);
+    console.lofindg("err", err);
     next(err);
   }
 });
+
+// exporting router module
 module.exports = router;
