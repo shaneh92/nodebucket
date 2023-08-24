@@ -15,18 +15,25 @@ const { ObjectId } = require("mongodb");
 
 const ajv = new Ajv(); //creates a new instance of Ajv class
 
-// define a scheme to validate a new task
-// TODO: Figure out why this is not preventing additional properties
-// TODO: as of now it is allowing us to send a second property of bar.
+// category schema
+const categorySchema = {
+  type: "object",
+  properties: {
+    categoryName: { type: "string" },
+    backgroundColor: { type: "string" },
+  },
+  required: ["categoryName", "backgroundColor"],
+  additionalProperties: false,
+};
 
+// define a scheme to validate a new task
 const taskSchema = {
   type: "object",
   properties: {
-    text: {
-      type: "string",
-    },
+    text: { type: "string" },
+    category: categorySchema,
   },
-  required: ["text"],
+  required: ["text", "category"],
   additionalProperties: false,
 };
 
@@ -215,12 +222,14 @@ router.post("/:empId/tasks", (req, res, next) => {
         return;
       }
 
-      const { text } = req.body;
-      console.log("req.body", req.body);
+      const { task } = req.body;
+
+      console.log("New task: ", task);
+      console.log("body", req.body);
 
       // validate the req object
       const validator = ajv.compile(taskSchema);
-      const valid = validator({ text });
+      const valid = validator(task);
 
       console.log("valid", valid);
 
@@ -234,14 +243,15 @@ router.post("/:empId/tasks", (req, res, next) => {
         return;
       }
 
-      const task = {
+      const newTask = {
         _id: new ObjectId(),
-        text,
+        text: task.text,
+        category: task.category,
       };
 
       const result = await db
         .collection("employees")
-        .updateOne({ empId }, { $push: { todo: task } });
+        .updateOne({ empId }, { $push: { todo: newTask } });
 
       console.log("result", result);
 
@@ -254,10 +264,10 @@ router.post("/:empId/tasks", (req, res, next) => {
         return;
       }
 
-      res.status(201).send({ id: task._id });
+      res.status(201).send({ id: newTask._id });
     }, next);
   } catch (err) {
-    console.lofindg("err", err);
+    console.log("err", err);
     next(err);
   }
 });

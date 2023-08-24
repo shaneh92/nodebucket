@@ -1,0 +1,12 @@
+* category of tasks
+* testing, project, and meeting
+
+{
+    "task": {
+        "text": "text",
+        "category": {
+            "categoryName": "test",
+            "backgroundColor": "red"
+        }
+    }
+}
