@@ -23,8 +23,8 @@
     "/employees/{empId}": {
       "get": {
         "tags": ["Employees"],
-        "summary": "findEmployeeById and will be able to return full name",
-        "description": "findEmployeeById and will be able to return full name based on their empId",
+        "summary": "Find employee by ID",
+        "description": "Returns an employee's information including tasks based on their empId.",
         "parameters": [
           {
             "name": "empId",
@@ -76,8 +76,8 @@
     "/employees/{empId}/tasks": {
       "get": {
         "tags": ["Employees"],
-        "description": "API for returning an array of employee objects.",
-        "summary": "Returns an array of employees in JSON format.",
+        "summary": "Retrieve tasks for an employee",
+        "description": "API for returning an array of tasks for a specific employee.",
         "parameters": [
           {
             "name": "empId",
@@ -85,15 +85,13 @@
             "description": "Employee ID",
             "required": true,
             "schema": {
-              "text": {
-                "type": "string"
-              }
+              "type": "number"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Employee document found"
+            "description": "Tasks retrieved successfully"
           },
           "400": {
             "description": "Bad request"
@@ -108,9 +106,8 @@
       },
       "post": {
         "tags": ["Employees"],
-        "name": "createTask",
+        "summary": "Create a new task",
         "description": "API for adding a new task document to MongoDB Atlas",
-        "summary": "Creates a new task document",
         "parameters": [
           {
             "name": "empId",
@@ -118,24 +115,16 @@
             "description": "Employee ID",
             "required": true,
             "schema": {
-              "text": {
-                "type": "string"
-              }
+              "type": "number"
             }
           }
         ],
         "requestBody": {
-          "description": "Composer information",
+          "description": "Task information",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": ["empId"],
-                "properties": {
-                  "text": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/taskSchema"
               }
             }
           }
@@ -154,6 +143,35 @@
             "description": "Server Error"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "taskSchema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "categoryName": {
+                    "type": "string"
+                  },
+                  "backgroundColor": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": ["task", "category"]
       }
     }
   }

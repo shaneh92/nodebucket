@@ -182,6 +182,14 @@ router.get("/:empId/tasks", (req, res, next) => {
  *              type: object
  *                text:
  *                  type: string
+ *             category:
+ *                type: object
+ *                properties:
+ *                 categoryName:
+ *                    type: string
+ *                 backgroundColor:
+ *                    type: string
+ *             required: text, category
  *     responses:
  *       '200':
  *         description: Employee document found

@@ -3,6 +3,7 @@
  * Author: Shane Hingtgen
  * Date: 8/15/23
  */
+
 // import statements
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

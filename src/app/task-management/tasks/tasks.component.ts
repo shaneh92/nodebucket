@@ -1,3 +1,10 @@
+/**
+ * Title: tasks.component.ts
+ * Modified by: Shane Hingtgen
+ * Date: 8/24/23
+ */
+
+// imports
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { TaskService } from '../task.service';
@@ -19,6 +26,7 @@ export class TasksComponent {
   errorMessage: string;
   successMessage: string;
 
+  // building our new form for tasks, with length requirements
   newTaskForm: FormGroup = this.fb.group({
     text: [
       null,
@@ -44,6 +52,7 @@ export class TasksComponent {
 
     this.empId = parseInt(this.cookieService.get('session_user'), 10);
 
+    // get the task by empId from the db, or show an error message
     this.taskService.getTask(this.empId).subscribe({
       next: (emp: any) => {
         console.log('emp', emp);
@@ -66,6 +75,7 @@ export class TasksComponent {
     });
   }
 
+  // our function for creating new tasks and adding them to the todo list
   addTask() {
     const text = this.newTaskForm.controls['text'].value;
     const category = this.newTaskForm.controls['category'].value;
@@ -78,6 +88,7 @@ export class TasksComponent {
 
     let newTask = this.getTask(text, category);
 
+    // when posted it will either return an error or a message of success
     this.taskService.addTask(this.empId, newTask).subscribe({
       next: (task: any) => {
         console.log('Task added with id', task.id);
@@ -97,6 +108,7 @@ export class TasksComponent {
     });
   }
 
+  // this will have an alert message for 3 seconds
   hideAlert() {
     setTimeout(() => {
       this.errorMessage = '';
@@ -104,6 +116,7 @@ export class TasksComponent {
     }, 3000);
   }
 
+  // this is getTask from the db and supply it with a color for our columns
   getTask(text: string, categoryName: string) {
     let task: Item = {} as Item;
 
