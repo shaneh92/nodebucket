@@ -125,6 +125,7 @@ export class TasksComponent {
     const purple = '#9F8FEF';
     const red = '#F87462';
 
+    // a switch statement for the categories and to set their colors
     switch (categoryName) {
       case 'testing':
         task = {
