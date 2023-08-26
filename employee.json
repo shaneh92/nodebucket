@@ -1,6 +1,5 @@
 {
   "openapi": "3.0.3",
-
   "info": {
     "version": "1.0.0",
     "title": "nodebucket employees API",
@@ -21,18 +20,20 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/employees/{empId}:": {
+    "/employees/{empId}": {
       "get": {
-        "tags": ["employees"],
-        "summary": "findEmployeeById and will be able to return full name",
-        "description": "findEmployeeById and will be able to return full name based on their empId",
+        "tags": ["Employees"],
+        "summary": "Find employee by ID",
+        "description": "Returns an employee's information including tasks based on their empId.",
         "parameters": [
           {
             "name": "empId",
             "in": "path",
             "description": "Employee ID",
             "required": true,
-            "type": "number"
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "responses": {
@@ -70,6 +71,107 @@
             "description": "Server Error"
           }
         }
+      }
+    },
+    "/employees/{empId}/tasks": {
+      "get": {
+        "tags": ["Employees"],
+        "summary": "Retrieve tasks for an employee",
+        "description": "API for returning an array of tasks for a specific employee.",
+        "parameters": [
+          {
+            "name": "empId",
+            "in": "path",
+            "description": "Employee ID",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks retrieved successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Employees"],
+        "summary": "Create a new task",
+        "description": "API for adding a new task document to MongoDB Atlas",
+        "parameters": [
+          {
+            "name": "empId",
+            "in": "path",
+            "description": "Employee ID",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Task information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/taskSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "taskSchema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "categoryName": {
+                    "type": "string"
+                  },
+                  "backgroundColor": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": ["task", "category"]
       }
     }
   }

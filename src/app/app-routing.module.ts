@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { HomeComponent } from './home/home.component';
 import { authGuard } from './shared/auth.guard';
+import { ContactComponent } from './contact/contact.component';
 
 // these are our routes to tell our app where to go when a user clicks on a link
 const routes: Routes = [
@@ -27,6 +28,11 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         title: 'Nodebucket: Home',
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        title: 'Nodebucket: Contact us',
       },
       {
         path: 'task-management',

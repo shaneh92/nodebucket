@@ -7,6 +7,10 @@
 "use strict";
 const { MongoClient } = require("mongodb");
 
+// production example, we would replace the mongo url with the one from the config file
+// const CONFIG  = require("./config");
+// const MONGO_URL = CONFIG.DB_URL;
+
 const MONGO_URL =
   "mongodb+srv://nodebucket_user:s3cret@bellevueuniversity.ut5xprd.mongodb.net/nodebucket?retryWrites=true&w=majority";
 
@@ -21,7 +25,7 @@ const mongo = async (operations, next) => {
     });
 
     // select the db
-    const db = client.db("nodebucket");
+    const db = client.db("nodebucket"); //if production change to CONFIG.DB_NAME
     console.log("Connected to MongoDB Atlas", db);
 
     // execute the operations

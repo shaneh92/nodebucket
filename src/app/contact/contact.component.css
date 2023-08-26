@@ -1,21 +1,22 @@
 /* 
-Title: tasks.component.css
+Title: contact.component.css
 Author: Shane Hingtgen
 Date: 8/24/23
 */
 
 /* these styles fix the btns, text and anchor tags to match theme */
+.map {
+  border: 4px solid black;
+}
 
 .btn {
   background-color: #946b2d;
-  color: white;
 }
 
 .container-fluid {
   color: white;
 }
 
-/* changes the cards inside the columns background */
-.bg-color {
-  background-color: #223164;
+a {
+  color: #946b2d;
 }
