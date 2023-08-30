@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "version": "1.0.0",
-    "title": "nodebucket employees API",
-    "description": "employee API"
+    "title": "Combined API",
+    "description": "A combination of employee and tasks APIs"
   },
   "servers": [
     {
@@ -144,6 +144,142 @@
           }
         }
       }
+    },
+    "/{empId}/tasks": {
+      "put": {
+        "tags": ["Employees"],
+        "summary": "Update tasks for an employee",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "empId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "updates a task for the employee"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "todo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "text": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "object",
+                          "properties": {
+                            "categoryName": {
+                              "type": "string"
+                            },
+                            "backgroundColor": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "required": ["_id", "text", "category"]
+                    }
+                  },
+                  "done": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "text": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "object",
+                          "properties": {
+                            "categoryName": {
+                              "type": "string"
+                            },
+                            "backgroundColor": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "required": ["_id", "text", "category"]
+                    }
+                  }
+                },
+                "required": ["todo", "done"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Tasks updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/employees/{empId}/tasks/{taskId}": {
+      "delete": {
+        "tags": ["Employees"],
+        "summary": "Delete a task for an employee",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "empId",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "ID of the employee"
+          },
+          {
+            "in": "path",
+            "name": "taskId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the task to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -172,6 +308,61 @@
           }
         },
         "required": ["task", "category"]
+      },
+      "tasksSchema": {
+        "type": "object",
+        "required": ["todo", "done"],
+        "additionalProperties": false,
+        "properties": {
+          "todo": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "object",
+                  "properties": {
+                    "categoryName": {
+                      "type": "string"
+                    },
+                    "backgroundColor": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "done": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "object",
+                  "properties": {
+                    "categoryName": {
+                      "type": "string"
+                    },
+                    "backgroundColor": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -108,6 +108,39 @@ export class TasksComponent {
     });
   }
 
+  // this allows us to delete our tasks
+  deleteTask(taskId: string) {
+    console.log('Task Item: ', taskId);
+
+    // if the user does not confirm the delete, it will not delete
+    if (!confirm('Are you sure you want to delete this task?')) {
+      return;
+    }
+
+    // when deleted it will either return an error or a message of success
+    this.taskService.deleteTask(this.empId, taskId).subscribe({
+      next: (res: any) => {
+        console.log('Task deleted with id: ', taskId);
+
+        // Chris Gorham asked a very important question in teams which resulted in this change to allow for an empty array written by Prof Krasso
+        if (this.todo) this.todo = []; //if todo array is null
+        if (this.done) this.done = []; //if done array is null
+
+        // filters under the arrays to find the correct id as a string, and checks its not taskId
+        this.todo = this.todo.filter((t) => t._id?.toString() !== taskId);
+        this.done = this.done.filter((t) => t._id?.toString() !== taskId);
+
+        this.successMessage = 'Task deleted successfully';
+        this.hideAlert();
+      },
+      error: (err) => {
+        console.log('err', err);
+        this.errorMessage = err.message;
+        this.hideAlert();
+      },
+    });
+  }
+
   // this will have an alert message for 3 seconds
   hideAlert() {
     setTimeout(() => {

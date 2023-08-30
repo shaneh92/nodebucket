@@ -30,7 +30,7 @@ const mongo = async (operations, next) => {
 
     // execute the operations
     await operations(db);
-    console.log("Operation was succesfull");
+    console.log("Operation was successful");
 
     // close the connection
     client.close();

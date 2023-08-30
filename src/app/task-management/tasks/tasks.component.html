@@ -180,6 +180,7 @@
 
           <div *ngFor="let item of todo" class="mt-2">
             <div class="row border bg-color">
+              <!--bg-color changes the background color of the tasks card-->
               <div class="col-sm-6">
                 <div class="card-body">
                   <button
@@ -198,6 +199,27 @@
                   </div>
                 </div>
               </div>
+              <!-- end col-sm-6 -->
+              <!-- TODO: fix shows on mobile for some students -->
+              <div class="col-sm-6">
+                <div class="card-body float-end">
+                  <button class="btn" (click)="deleteTask(item._id ?? '')">
+                    <span class="material-icons">delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- end row -->
+            <!-- mobile only viewport -->
+            <div
+              class="col-12 d-sm-none d-md-none d-lg-none d-xl-none d-grid gap-2 p-2"
+            >
+              <button
+                class="btn btn-secondary"
+                (click)="deleteTask(item._id ?? '')"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -206,8 +228,10 @@
     <!-- end of todo -->
 
     <!-- done column -->
+
     <div class="col-sm-5 col-md-4 col-lg-5">
       <h4 class="text-center">Done</h4>
+
       <div class="p-3 border bg-light">
         <div class="container">
           <!-- message for no done tasks -->
@@ -217,7 +241,8 @@
           <!-- end of message for no tasks done -->
 
           <div *ngFor="let item of done" class="mt-2">
-            <div class="row border bg-white">
+            <div class="row border bg-color">
+              <!--bg-color changes the background color of the tasks card-->
               <div class="col-sm-6">
                 <div class="card-body">
                   <button
@@ -236,7 +261,18 @@
                   </div>
                 </div>
               </div>
+              <!-- end of col-sm-6 -->
+
+              <div class="col-sm-6">
+                <div class="card-body float-end">
+                  <button class="btn" (click)="deleteTask(item._id ?? '')">
+                    <span class="material-icons">delete</span>
+                  </button>
+                </div>
+              </div>
+              <!-- end of second col 6 -->
             </div>
+            <!-- end of row -->
           </div>
         </div>
       </div>
