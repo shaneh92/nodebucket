@@ -19,3 +19,11 @@ Date: 8/24/23
 .bg-color {
   background-color: #223164;
 }
+
+.task-column {
+  min-height: 200px;
+}
+
+.task-hover:hover {
+  cursor: pointer;
+}

@@ -17,6 +17,8 @@ import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component
 import { NavComponent } from './layouts/nav/nav.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AboutComponent } from './about/about.component';
 
 // module declarations and imports
 @NgModule({
@@ -27,6 +29,8 @@ import { ContactComponent } from './contact/contact.component';
     NavComponent,
     FooterComponent,
     ContactComponent,
+    NotFoundComponent,
+    AboutComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

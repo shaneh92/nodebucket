@@ -11,6 +11,11 @@ import { TaskService } from '../task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Employee } from './employee.interface';
 import { Item } from './item.interface';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-tasks',
@@ -39,6 +44,7 @@ export class TasksComponent {
     category: [null],
   });
 
+  // constructor class for our tasks and to get the cookie service, task service, and form builder
   constructor(
     private cookieService: CookieService,
     private taskService: TaskService,
@@ -63,6 +69,8 @@ export class TasksComponent {
         this.errorMessage = err.message;
         this.hideAlert();
       },
+
+      // when complete, it will log complete and set the todo and done arrays
       complete: () => {
         console.log('complete');
 
@@ -86,6 +94,7 @@ export class TasksComponent {
       return;
     }
 
+    // set new variable on getting the task with text and category
     let newTask = this.getTask(text, category);
 
     // when posted it will either return an error or a message of success
@@ -123,8 +132,8 @@ export class TasksComponent {
         console.log('Task deleted with id: ', taskId);
 
         // Chris Gorham asked a very important question in teams which resulted in this change to allow for an empty array written by Prof Krasso
-        if (this.todo) this.todo = []; //if todo array is null
-        if (this.done) this.done = []; //if done array is null
+        if (!this.todo) this.todo = []; //if todo array is null
+        if (!this.done) this.done = []; //if done array is null
 
         // filters under the arrays to find the correct id as a string, and checks its not taskId
         this.todo = this.todo.filter((t) => t._id?.toString() !== taskId);
@@ -132,6 +141,45 @@ export class TasksComponent {
 
         this.successMessage = 'Task deleted successfully';
         this.hideAlert();
+      },
+      // if there is an error, it will log the error
+      error: (err) => {
+        console.log('err', err);
+        this.errorMessage = err.message;
+        this.hideAlert();
+      },
+    });
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      console.log('Moved item in array', event.container.data);
+
+      // calls update api
+      this.updateTaskList(this.empId, this.todo, this.done);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      console.log('Moved item in array', event.container.data);
+
+      // calls update api
+      this.updateTaskList(this.empId, this.todo, this.done);
+    }
+  }
+
+  updateTaskList(empId: number, todo: Item[], done: Item[]) {
+    this.taskService.updateTask(empId, todo, done).subscribe({
+      next: (res: any) => {
+        console.log('Task updated successfully');
       },
       error: (err) => {
         console.log('err', err);
@@ -153,6 +201,7 @@ export class TasksComponent {
   getTask(text: string, categoryName: string) {
     let task: Item = {} as Item;
 
+    // colors for each category, Meeting, Testing, Projects, and Default
     const white = '#FFFFFF';
     const green = '#4BCE97';
     const purple = '#9F8FEF';
