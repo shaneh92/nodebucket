@@ -143,9 +143,7 @@
             "description": "Server Error"
           }
         }
-      }
-    },
-    "/{empId}/tasks": {
+      },
       "put": {
         "tags": ["Employees"],
         "summary": "Update tasks for an employee",

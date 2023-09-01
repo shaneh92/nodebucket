@@ -27,3 +27,8 @@ Date: 8/24/23
 .task-hover:hover {
   cursor: pointer;
 }
+
+.btn-add:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
