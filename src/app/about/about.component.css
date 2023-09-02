@@ -1,0 +1,24 @@
+/* 
+Title: about.component.css
+Author: Shane Hingtgen
+Date: 8/31/23
+*/
+
+/* these change the background colors and text colors */
+/* this one for header */
+.about {
+  min-height: 600px;
+  background-color: #0f1d4a;
+  margin-top: 1%;
+  color: white;
+}
+
+/* this is the line that separates each section */
+
+hr {
+  color: #946b2d;
+}
+/* this one for the remaining page */
+.container {
+  color: white;
+}

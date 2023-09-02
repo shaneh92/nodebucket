@@ -1,0 +1,20 @@
+/* 
+Title: not-found.component.css
+Author: Shane Hingtgen
+Date: 8/31/23
+*/
+
+/* these change the background and text color */
+.container {
+  color: white;
+}
+.btn {
+  background-color: #946b2d;
+  color: white;
+}
+
+/* button will now enlarge and show pointer on hover */
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
