@@ -34,6 +34,7 @@ export class NavComponent {
     }
   }
 
+  // our signout function for the nav bar
   signout() {
     this.cookieService.deleteAll();
     window.location.href = '/';

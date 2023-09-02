@@ -36,7 +36,7 @@ const taskSchema = {
   required: ["text", "category"],
   additionalProperties: false,
 };
-
+// our new tasks schema for adding tasks into done or todo, uses the category schema
 const tasksSchema = {
   type: "object",
   required: ["todo", "done"],
@@ -113,6 +113,7 @@ router.get("/:empId", (req, res, next) => {
       return;
     }
 
+    // connection to mongo, to find collection of employees, then find one empId.
     mongo(
       async (db) => {
         const employee = await db.collection("employees").findOne({ empId }); //find employee by ID
